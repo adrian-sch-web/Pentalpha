@@ -2,9 +2,11 @@
     <svg height="800" viewBox="0 0 200 200">
         <circle cx="100" cy="100" r="100" style="fill:#505050"/>
         <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>
-        <!-- @for (point of outerPoints; track $index) {
-        <circle [attr.cx]="point[0]" [attr.cy]="point[1]" r="7"/>
-        } -->
-        <circle *ngFor="let point of outerPoints" [attr.cx]="point[0]" [attr.cy]="point[1]" r="7"/>
+        @for (point of outerPentagram.points; track $index) {
+            <circle [attr.cx]="point[0]" [attr.cy]="point[1]" r="7" [attr.fill]="'none'"/>
+        }
+        @for (point of innerPentagram.points; track $index) {
+            <circle [attr.cx]="point[0]" [attr.cy]="point[1]" r="7"/>
+            }
     </svg>
 </div>
