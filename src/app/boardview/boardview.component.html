@@ -2,11 +2,8 @@
     <svg height="800" viewBox="0 0 200 200">
         <circle cx="100" cy="100" r="100" style="fill:#505050"/>
         <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>
-        @for (point of pentagram.outerPoints; track $index) {
-            <circle [attr.cx]="point[0]" [attr.cy]="point[1]" r="7" [attr.fill]="getStoneColor($index,true)"/>
+        @for (spot of pentagram; track $index) {
+            <circle [attr.cx]="spot.point[0]" [attr.cy]="spot.point[1]" r="7" [attr.fill-opacity]="getOpacity($index)" [attr.fill]="spot.color"/>
         }
-        @for (point of pentagram.innerPoints; track $index) {
-            <circle [attr.cx]="point[0]" [attr.cy]="point[1]" r="7" [attr.fill]="getStoneColor($index,false)"/>
-            }
     </svg>
 </div>
