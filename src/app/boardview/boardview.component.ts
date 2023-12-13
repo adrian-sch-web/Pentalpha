@@ -9,14 +9,18 @@ import { Pentagram } from './Pentagram';
 export class BoardviewComponent implements OnInit {
   private degreeToRadian = Math.PI / 180;
   private goldenRatio = (1 + Math.sqrt(5)) / 2;
-  public outerPentagram: Pentagram = { points: [], stones: [] };
-  public innerPentagram: Pentagram = { points: [], stones: [] };
+  public pentagram: Pentagram = {
+    outerPoints: [],
+    outerStones: [],
+    innerPoints: [],
+    innerStones: []
+  };
 
   ngOnInit(): void {
-    this.outerPentagram.points = this.getPoints(90, 270);
-    this.outerPentagram.stones = [false, false, false, false, false];
-    this.innerPentagram.points = this.getPoints(90 / (this.goldenRatio ** 2), 90);
-    this.innerPentagram.stones = [false, false, false, false, false];
+    this.pentagram.outerPoints = this.getPoints(90, 270);
+    this.pentagram.outerStones = [false, false, false, false, false];
+    this.pentagram.innerPoints = this.getPoints(90 / (this.goldenRatio ** 2), 90);
+    this.pentagram.innerStones = [false, false, false, false, false];
   }
 
   getPoints(radius: number, startAngle: number) {
@@ -29,6 +33,15 @@ export class BoardviewComponent implements OnInit {
   }
 
   getPentagram(): string {
-    return this.outerPentagram.points.map(a => a.join(",")).join(" ");
+    return this.pentagram.outerPoints.map(a => a.join(",")).join(" ");
+  }
+
+  getStoneColor(index: number, outer: boolean): string {
+    if (outer) {
+      return this.pentagram.outerStones[index] ? 'black' : 'none';
+    }
+    else {
+      return this.pentagram.innerStones[index] ? 'black' : 'none';
+    }
   }
 }

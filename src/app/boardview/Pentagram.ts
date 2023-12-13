@@ -1,4 +1,6 @@
 export interface Pentagram {
-    points: number[][];
-    stones: boolean[];
+    outerPoints: number[][];
+    outerStones: boolean[];
+    innerPoints: number[][];
+    innerStones: boolean[];
 }
