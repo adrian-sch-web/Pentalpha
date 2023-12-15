@@ -1,4 +1,8 @@
-<div>
+<div style="text-align: center;">
+    <div class="scoreboard">
+        Score: {{points}} <br/>
+        Game Running: {{gameRunning}}
+    </div>
     <svg height="800" viewBox="0 0 200 200">
         <circle cx="100" cy="100" r="100" style="fill:#505050"/>
         <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>

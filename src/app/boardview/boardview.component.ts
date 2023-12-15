@@ -10,8 +10,11 @@ export class BoardviewComponent implements OnInit {
   private degreeToRadian = Math.PI / 180;
   private goldenRatio = (1 + Math.sqrt(5)) / 2;
   private selectedNode?: number;
+  private possibleNodes?: number[];
 
   public pentagram: Pentagram = [];
+  public points: number = 0;
+  public gameRunning = true;
 
   ngOnInit(): void {
     this.getPoints(90, 270);
@@ -38,7 +41,10 @@ export class BoardviewComponent implements OnInit {
   }
 
   getOpacity(index: number): string {
-    return this.pentagram[index].stone ? "1" : "0.5";
+    if (this.selectedNode == index) {
+      return "1";
+    }
+    return this.pentagram[index].stone ? "1" : "0.2";
   }
 
   getColorString(color: Color): string {
@@ -46,32 +52,73 @@ export class BoardviewComponent implements OnInit {
   }
 
   mouseEnter(index: number) {
+    if (this.selectedNode != undefined) {
+      return;
+    }
     if (!this.pentagram[index].stone) {
       this.pentagram[index].color = Color.red;
-      for (let point of this.getPossiblePlaces(index)) {
+      for (let point of this.getPossibleNodes(index)) {
         this.pentagram[point].color = Color.green;
       }
     }
   }
 
-  getPossiblePlaces(index: number): number[] {
+  getPossibleNodes(index: number): number[] {
     let places: number[] = [];
+    if (index <= 4) {
+      if (!this.pentagram[((index + 2) % 5) + 5].stone) places.push(((index + 2) % 5) + 5);
+      if (!this.pentagram[((index + 3) % 5) + 5].stone) places.push(((index + 3) % 5) + 5);
+      return places;
+    }
     if (!this.pentagram[(index + 2) % 5].stone) places.push((index + 2) % 5);
     if (!this.pentagram[(index + 3) % 5].stone) places.push((index + 3) % 5);
-    if (index <= 4) {
-      places.forEach((a, index, array) => array[index] += 5)
-    }
     return places;
   }
 
   mouseLeave(index: number) {
+    if (this.selectedNode != undefined) {
+      return;
+    }
     this.pentagram[index].color = Color.black;
-    for (let point of this.getPossiblePlaces(index)) {
+    for (let point of this.getPossibleNodes(index)) {
+      if (this.possibleNodes && this.possibleNodes.some(a => a == point)) {
+        continue;
+      }
       this.pentagram[point].color = Color.black;
     }
   }
 
   onClick(index: number) {
-    
+    if (this.selectedNode == index) {
+      this.selectedNode = undefined;
+      this.possibleNodes = undefined;
+      return;
+    }
+    let possibleNodes = this.getPossibleNodes(index);
+    if (this.selectedNode != undefined || possibleNodes.length == 0) {
+      if (this.possibleNodes?.some(a => a == index)) {
+        this.place(index);
+      }
+      return;
+    }
+    this.selectedNode = index;
+    this.possibleNodes = possibleNodes;
+  }
+
+  place(index: number) {
+    this.pentagram[index].stone = true;
+    let temp = this.selectedNode!;
+    this.selectedNode = undefined;
+    this.possibleNodes = undefined;
+    this.mouseLeave(temp);
+    this.points++;
+    this.checkGame();
+  }
+
+  checkGame() {
+    if (this.pentagram.some((a, index) => !a.stone && this.getPossibleNodes(index).length > 0)) {
+      return;
+    }
+    this.gameRunning = false;
   }
 }
