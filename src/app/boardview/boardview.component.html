@@ -4,7 +4,7 @@
             Score: {{score}} <br/>
         </div>
         <svg height="800" viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="100" style="fill:#505050"/>
+            <circle cx="100" cy="100" r="100" style="fill:rgb(143, 113, 98)"/>
             <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>
             @for (spot of pentagram; track $index) {
                 <circle [attr.cx]="spot.point[0]" [attr.cy]="spot.point[1]" r="7" [attr.fill-opacity]="getOpacity($index)" [attr.fill]="getColorString(spot.color)" (mouseenter)="mouseEnter($index)" (mouseleave)="mouseLeave($index)" (click)="onClick($index)"/>
