@@ -13,7 +13,7 @@ export class BoardviewComponent implements OnInit {
   private possibleNodes?: number[];
 
   public pentagram: Pentagram = [];
-  public points: number = 0;
+  public score: number = 0;
   public gameRunning = true;
 
   ngOnInit(): void {
@@ -21,7 +21,7 @@ export class BoardviewComponent implements OnInit {
     this.getPoints(90 / (this.goldenRatio ** 2), 90);
   }
 
-  getPoints(radius: number, startAngle: number) {
+  public getPoints(radius: number, startAngle: number) {
     for (let i = 0; i < 5; i++) {
       this.pentagram.push({
         point: [100 + radius * Math.cos(startAngle * this.degreeToRadian), 100 + radius * Math.sin(startAngle * this.degreeToRadian)],
@@ -111,14 +111,19 @@ export class BoardviewComponent implements OnInit {
     this.selectedNode = undefined;
     this.possibleNodes = undefined;
     this.mouseLeave(temp);
-    this.points++;
+    this.score++;
     this.checkGame();
   }
 
   checkGame() {
-    if (this.pentagram.some((a, index) => !a.stone && this.getPossibleNodes(index).length > 0)) {
-      return;
-    }
-    this.gameRunning = false;
+    this.gameRunning = this.pentagram.some((a, index) => !a.stone && this.getPossibleNodes(index).length > 0)
+  }
+
+  restartGame() {
+    this.score = 0;
+    this.gameRunning = true;
+    this.pentagram = [];
+    this.getPoints(90, 270);
+    this.getPoints(90 / (this.goldenRatio ** 2), 90);
   }
 }

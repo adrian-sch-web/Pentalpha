@@ -1,0 +1,14 @@
+@if(score != undefined && score < 9){
+<div>
+    You finished the game with a score of {{score}} / 9 <br/>
+    Unfortunately you did not reach the maximum score.
+    <br/>
+    <br/>
+</div>
+<button mat-fab color="primary" (click)="restartGame()">Try again!</button>
+}
+@else {
+    <div>WOW! What a game. You finished the game with the maximum score of 9.<br/>
+        Congratulations!
+    </div>
+}

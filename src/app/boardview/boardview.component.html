@@ -1,13 +1,17 @@
 <div style="text-align: center;">
-    <div class="scoreboard">
-        Score: {{points}} <br/>
-        Game Running: {{gameRunning}}
-    </div>
-    <svg height="800" viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="100" style="fill:#505050"/>
-        <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>
-        @for (spot of pentagram; track $index) {
-            <circle [attr.cx]="spot.point[0]" [attr.cy]="spot.point[1]" r="7" [attr.fill-opacity]="getOpacity($index)" [attr.fill]="getColorString(spot.color)" (mouseenter)="mouseEnter($index)" (mouseleave)="mouseLeave($index)" (click)="onClick($index)"/>
-        }
-    </svg>
+    @if(gameRunning){
+        <div class="scoreboard">
+            Score: {{score}} <br/>
+        </div>
+        <svg height="800" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="100" style="fill:#505050"/>
+            <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>
+            @for (spot of pentagram; track $index) {
+                <circle [attr.cx]="spot.point[0]" [attr.cy]="spot.point[1]" r="7" [attr.fill-opacity]="getOpacity($index)" [attr.fill]="getColorString(spot.color)" (mouseenter)="mouseEnter($index)" (mouseleave)="mouseLeave($index)" (click)="onClick($index)"/>
+            }
+        </svg>
+    }
+    @else {
+        <app-gamefinished [score]="score" (newGame)="restartGame()"></app-gamefinished>
+    }
 </div>
