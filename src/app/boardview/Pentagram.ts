@@ -1,3 +1,4 @@
+
 export type Pentagram = Spot[];
 
 export interface Spot {
