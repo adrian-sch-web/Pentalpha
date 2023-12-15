@@ -7,8 +7,6 @@ import { Pentagram, Color } from './Pentagram';
   styleUrls: ['./boardview.component.scss']
 })
 export class BoardviewComponent implements OnInit {
-  private degreeToRadian = Math.PI / 180;
-  private goldenRatio = (1 + Math.sqrt(5)) / 2;
   private selectedNode?: number;
   private possibleNodes?: number[];
 
@@ -17,14 +15,14 @@ export class BoardviewComponent implements OnInit {
   public gameRunning = true;
 
   ngOnInit(): void {
-    this.getPoints(90, 270);
-    this.getPoints(90 / (this.goldenRatio ** 2), 90);
+    this.setupGame();
   }
 
-  public getPoints(radius: number, startAngle: number) {
+  public buildPentagram(radius: number, startAngle: number) {
+    let degreeToRadian = Math.PI / 180;
     for (let i = 0; i < 5; i++) {
       this.pentagram.push({
-        point: [100 + radius * Math.cos(startAngle * this.degreeToRadian), 100 + radius * Math.sin(startAngle * this.degreeToRadian)],
+        point: [100 + radius * Math.cos(startAngle * degreeToRadian), 100 + radius * Math.sin(startAngle * degreeToRadian)],
         stone: false,
         color: Color.black
       });
@@ -119,11 +117,12 @@ export class BoardviewComponent implements OnInit {
     this.gameRunning = this.pentagram.some((a, index) => !a.stone && this.getPossibleNodes(index).length > 0)
   }
 
-  restartGame() {
+  setupGame() {
+    let goldenRatio = (1 + Math.sqrt(5)) / 2;
     this.score = 0;
     this.gameRunning = true;
     this.pentagram = [];
-    this.getPoints(90, 270);
-    this.getPoints(90 / (this.goldenRatio ** 2), 90);
+    this.buildPentagram(90, 270);
+    this.buildPentagram(90 / (goldenRatio ** 2), 90);
   }
 }
