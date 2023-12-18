@@ -139,8 +139,8 @@ export class BoardviewComponent implements OnInit {
   cheatModeCheck(index: number) {
     this.placeNext.delete(index);
     let temp = index > 4 ? 0 : 5;
-    if (!this.pentagram[(index + 7) % 5].stone) this.placeNext.add((index + 7) % 5 + temp);
-    if (!this.pentagram[(index + 8) % 5].stone) this.placeNext.add((index + 8) % 5 + temp);
+    if (!this.pentagram[(index + 7) % 5 + temp].stone) this.placeNext.add((index + 7) % 5 + temp);
+    if (!this.pentagram[(index + 8) % 5 + temp].stone) this.placeNext.add((index + 8) % 5 + temp);
     this.placeNext.forEach(i => this.pentagram[i].color = 3);
   }
 
