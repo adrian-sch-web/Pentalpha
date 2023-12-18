@@ -1,18 +1,12 @@
 <div style="text-align: center;">
-    @if(gameRunning){
+    @if (gameRunning) {
         <div class="scoreboard">
             Score: {{score}} <br/>
             @if(cheatMode){
                 <span>Current round is played in cheat mode!</span>
             }
         </div>
-        @if(!cheatMode){
-            <div class="cheat-mode">
-                <button mat-raised-button color="primary" (click)="startCheatMode()">toggle <br/>computer help</button>
-            </div>
-        }
-        @else 
-        {
+        @if (cheatMode) {
             <div class="cheat-mode">
                 <button mat-raised-button color="primary" (click)="setupGame()">restart <br/>without help</button>
             </div>
@@ -20,6 +14,13 @@
                 Try to place the your next stone on one of the yellow nodes<br/> to achieve the maximum score possible from this point.
             </div>
         }
+        @else {
+        
+            <div class="cheat-mode">
+                <button mat-raised-button color="primary" (click)="startCheatMode()">toggle <br/>computer help</button>
+            </div>
+        } 
+        
         <svg height="800" viewBox="0 0 200 200">
             <circle cx="100" cy="100" r="100" style="fill:rgb(143, 113, 98)"/>
             <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>
@@ -29,6 +30,6 @@
         </svg>
     }
     @else {
-        <app-gamefinished [score]="score" [cheatMode]="cheatMode" (newGame)="setupGame()"></app-gamefinished>
+        <app-gamefinished [score]="score" [cheatMode]="cheatMode" [time]="getPassedTime()" (newGame)="setupGame()"></app-gamefinished>
     }
 </div>

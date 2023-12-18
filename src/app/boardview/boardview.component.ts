@@ -15,6 +15,7 @@ export class BoardviewComponent implements OnInit {
   public gameRunning = true;
   public cheatMode: boolean = false;
   public placeNext: Set<number> = new Set<number>();
+  public startTime?: Date;
 
   ngOnInit(): void {
     this.setupGame();
@@ -92,6 +93,9 @@ export class BoardviewComponent implements OnInit {
   }
 
   onClick(index: number) {
+    if (!this.startTime) {
+      this.startTime = new Date();
+    }
     if (this.selectedNode == index) {
       this.selectedNode = undefined;
       this.possibleNodes = undefined;
@@ -128,10 +132,11 @@ export class BoardviewComponent implements OnInit {
   setupGame() {
     let goldenRatio = (1 + Math.sqrt(5)) / 2;
     this.score = 0;
+    this.pentagram = [];
     this.gameRunning = true;
     this.cheatMode = false;
     this.placeNext = new Set();
-    this.pentagram = [];
+    this.startTime = undefined;
     this.buildPentagram(90, 270);
     this.buildPentagram(90 / (goldenRatio ** 2), 90);
   }
@@ -151,5 +156,12 @@ export class BoardviewComponent implements OnInit {
         this.cheatModeCheck(i);
       }
     })
+  }
+
+  getPassedTime(): number {
+    if (this.startTime) {
+      return new Date().getTime() - this.startTime.getTime();
+    }
+    return 0;
   }
 }
