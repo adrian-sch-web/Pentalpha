@@ -1,4 +1,4 @@
-@if(score != undefined && score < 9){
+@if( score < 9){
 <div>
     You finished the game with a score of {{score}} / 9 <br/>
     Unfortunately you did not reach the maximum score.
@@ -6,11 +6,17 @@
     <br/>
 </div>
 }
-@else {
+@else if (!cheatMode){
     <div>WOW! What a game. You finished the game with the maximum score of 9.<br/>
         Congratulations!
         <br/>
         <br/>
     </div>
+}
+@else {
+    <div>You reached the maximum score with the help of the computer</div>
+    <div>Try again without help!</div>
+    <br/>
+    <br/>
 }
 <button mat-raised-button color="primary" (click)="restartGame()">Try again!</button>

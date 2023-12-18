@@ -6,7 +6,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './gamefinished.component.scss'
 })
 export class GamefinishedComponent {
-  @Input() score?: number;
+  @Input() score: number= 0;
+  @Input() cheatMode: boolean = false;
   @Output() newGame = new EventEmitter<boolean>;
 
   restartGame() {

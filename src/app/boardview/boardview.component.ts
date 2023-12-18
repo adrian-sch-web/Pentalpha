@@ -13,6 +13,7 @@ export class BoardviewComponent implements OnInit {
   public pentagram: Pentagram = [];
   public score: number = 0;
   public gameRunning = true;
+  public cheatMode: boolean = false;
 
   ngOnInit(): void {
     this.setupGame();
@@ -121,6 +122,7 @@ export class BoardviewComponent implements OnInit {
     let goldenRatio = (1 + Math.sqrt(5)) / 2;
     this.score = 0;
     this.gameRunning = true;
+    this.cheatMode = false;
     this.pentagram = [];
     this.buildPentagram(90, 270);
     this.buildPentagram(90 / (goldenRatio ** 2), 90);
