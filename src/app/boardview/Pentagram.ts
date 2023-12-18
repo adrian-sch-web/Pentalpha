@@ -10,5 +10,6 @@ export interface Spot {
 export enum Color {
     black,
     green,
-    red
+    red,
+    yellow
 }

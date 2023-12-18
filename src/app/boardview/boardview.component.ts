@@ -14,6 +14,7 @@ export class BoardviewComponent implements OnInit {
   public score: number = 0;
   public gameRunning = true;
   public cheatMode: boolean = false;
+  public placeNext: Set<number> = new Set<number>();
 
   ngOnInit(): void {
     this.setupGame();
@@ -84,6 +85,9 @@ export class BoardviewComponent implements OnInit {
         continue;
       }
       this.pentagram[point].color = Color.black;
+      if (this.cheatMode) {
+        this.placeNext.forEach(i => this.pentagram[i].color = 3);
+      }
     }
   }
 
@@ -112,6 +116,9 @@ export class BoardviewComponent implements OnInit {
     this.mouseLeave(temp);
     this.score++;
     this.checkGame();
+    if (this.cheatMode) {
+      this.cheatModeCheck(index);
+    }
   }
 
   checkGame() {
@@ -123,8 +130,26 @@ export class BoardviewComponent implements OnInit {
     this.score = 0;
     this.gameRunning = true;
     this.cheatMode = false;
+    this.placeNext = new Set();
     this.pentagram = [];
     this.buildPentagram(90, 270);
     this.buildPentagram(90 / (goldenRatio ** 2), 90);
+  }
+
+  cheatModeCheck(index: number) {
+    this.placeNext.delete(index);
+    let temp = index > 4 ? 0 : 5;
+    if (!this.pentagram[(index + 7) % 5].stone) this.placeNext.add((index + 7) % 5 + temp);
+    if (!this.pentagram[(index + 8) % 5].stone) this.placeNext.add((index + 8) % 5 + temp);
+    this.placeNext.forEach(i => this.pentagram[i].color = 3);
+  }
+
+  startCheatMode() {
+    this.cheatMode = true;
+    this.pentagram.forEach((node, i) => {
+      if (node.stone) {
+        this.cheatModeCheck(i);
+      }
+    })
   }
 }
