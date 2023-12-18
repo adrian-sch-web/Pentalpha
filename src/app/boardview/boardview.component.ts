@@ -66,13 +66,9 @@ export class BoardviewComponent implements OnInit {
 
   getPossibleNodes(index: number): number[] {
     let places: number[] = [];
-    if (index <= 4) {
-      if (!this.pentagram[((index + 2) % 5) + 5].stone) places.push(((index + 2) % 5) + 5);
-      if (!this.pentagram[((index + 3) % 5) + 5].stone) places.push(((index + 3) % 5) + 5);
-      return places;
-    }
-    if (!this.pentagram[(index + 2) % 5].stone) places.push((index + 2) % 5);
-    if (!this.pentagram[(index + 3) % 5].stone) places.push((index + 3) % 5);
+    let temp = index > 4 ? 0 : 5;
+    if (!this.pentagram[(index + 2) % 5 + temp].stone) places.push((index + 2) % 5 + temp);
+    if (!this.pentagram[(index + 3) % 5 + temp].stone) places.push((index + 3) % 5 + temp);
     return places;
   }
 

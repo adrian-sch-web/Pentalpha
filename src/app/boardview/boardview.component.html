@@ -8,7 +8,7 @@
         </div>
         @if (cheatMode) {
             <div class="cheat-mode">
-                <button mat-raised-button color="primary" (click)="setupGame()">restart <br/>without help</button>
+                <button mat-raised-button color="primary" class="button" (click)="setupGame()">restart <br/>without help</button>
             </div>
             <div class="cheat-advice">
                 Try to place the your next stone on one of the yellow nodes<br/> to achieve the maximum score possible from this point.
@@ -17,7 +17,7 @@
         @else {
         
             <div class="cheat-mode">
-                <button mat-raised-button color="primary" (click)="startCheatMode()">toggle <br/>computer help</button>
+                <button mat-raised-button color="primary" class="button" (click)="startCheatMode()">toggle <br/>computer help</button>
             </div>
         } 
         
@@ -25,7 +25,7 @@
             <circle cx="100" cy="100" r="100" style="fill:rgb(143, 113, 98)"/>
             <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>
             @for (spot of pentagram; track $index) {
-                <circle [attr.cx]="spot.point[0]" [attr.cy]="spot.point[1]" r="7" [attr.fill-opacity]="getOpacity($index)" [attr.fill]="getColorString(spot.color)" (mouseenter)="mouseEnter($index)" (mouseleave)="mouseLeave($index)" (click)="onClick($index)"/>
+                <circle [attr.cx]="spot.point[0]" [attr.cy]="spot.point[1]" r="9" [attr.fill-opacity]="getOpacity($index)" [attr.fill]="getColorString(spot.color)" (mouseenter)="mouseEnter($index)" (mouseleave)="mouseLeave($index)" (click)="onClick($index)"/>
             }
         </svg>
     }
