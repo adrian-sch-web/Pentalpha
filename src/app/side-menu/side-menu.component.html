@@ -1,9 +1,22 @@
 <div>
-    <div class="scoreboard">
+    <div class="score-container">
+        <div class="scoreboard">
         Score: {{score}} <br/>
         @if(learnMode){
             <span>Current round is played in learning mode!</span>
         }
+        </div>
+        <button class="help-button" mat-icon-button [matMenuTriggerFor]="rules">
+            <mat-icon>help</mat-icon>
+        </button>
+        <mat-menu #rules>
+            <div mat-menu-item>
+                Das Ziel des Spiels ist es die 9 Spielsteine auf den Spitzen und auf den Knotenpunkten zu platzieren.<br/>
+                Dazu wählt man eine Punkt auf, der nicht besetzt sein darf und zieht zwei Punkt in gerade Linie weiter. 
+                Dann platziert man den Stein auf dem erreichten Feld. Auch dieses darf nicht besetzt sein.<br/>
+                Achtung!! Es läuft ein Timer mit. Es zählt also jede Sekunde.
+            </div>
+        </mat-menu>
     </div>
     <div class="buttons">
         @if (learnMode) {
@@ -12,13 +25,9 @@
             </div>
         }
         @else{
-            <div class="learn-mode">
-                <button mat-raised-button color="primary" class="button" (click)="startLearnMode()">enable <br/>learning mode</button>            
-            </div>
+            <button mat-raised-button color="primary" class="button" (click)="startLearnMode()">enable <br/>learning mode</button>            
         }
-        <div class="restart">
-            <button mat-raised-button color="primary" class="button" (click)="start()">restart</button>
-        </div>  
+        <button mat-raised-button color="primary" class="button" (click)="start()">restart</button> 
     </div>
     <mat-accordion>
         <mat-expansion-panel (opened)="panelOpened = true" (closed)="panelOpened = false">

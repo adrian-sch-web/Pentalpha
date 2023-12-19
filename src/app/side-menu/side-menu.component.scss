@@ -1,22 +1,15 @@
+.score-container{
+    display: flex;
+    justify-content: space-between;
+}
 .scoreboard {
     width:fit-content;
-    left: 40px;
     padding: 5px;
     border: solid;
     border-radius: 5px;
     background-color: rgb(200, 200, 200);
-}
-
-.restart{
-    left: 40px;
-    top: 130px;
-    padding: 5px;
-}
-
-.learn-mode {
-    left: 130px;
-    top: 130px;
-    padding: 5px;
+    height: fit-content;
+    align-self: center;
 }
 
 .learn-advice {

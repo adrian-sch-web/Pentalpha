@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
