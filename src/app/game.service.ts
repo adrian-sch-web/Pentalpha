@@ -11,17 +11,11 @@ export class GameService {
   private placeNext: Set<number> = new Set<number>();
   private startTime?: Date;
   private timeSpent: number = 0;
-
   public score: number = 0;
   public gameRunning: boolean = true;
   public learnMode: boolean = false;
 
-
   constructor() { }
-
-  getPentagramCoords():number[][]{
-    return this.pentagram.getPentagramCoords();
-  }
 
   start() {
     this.score = 0;
@@ -100,14 +94,13 @@ export class GameService {
     this.placeNext.forEach(i => this.pentagram.spots[i].color = 3);
   }
 
-
   place(index: number) {
     this.pentagram.spots[index].stone = true;
     let temp = this.selectedNode!;
     this.selectedNode = undefined;
     this.possibleNodes = undefined;
-    this.mouseLeave(temp);
     this.score++;
+    this.mouseLeave(temp);
     this.checkGame();
     if (this.learnMode) {
       this.learnModeCheck(index);

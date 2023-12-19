@@ -12,23 +12,6 @@ export class Pentagram {
         }
     }
 
-    public getPentagramCoords(): number[][] {
-        let goldenRatio = (1 + Math.sqrt(5)) / 2;
-        let coords: number[][] = this.buildPentagram(90, 270);
-        coords.push(...this.buildPentagram(90 / (goldenRatio ** 2), 90));
-        return coords;
-    }
-
-    private buildPentagram(radius: number, startAngle: number): number[][] {
-        let degreeToRadian = Math.PI / 180;
-        let coords: number[][] = [];
-        for (let i = 0; i < 5; i++) {
-            coords.push([100 + radius * Math.cos(startAngle * degreeToRadian), 100 + radius * Math.sin(startAngle * degreeToRadian)]);
-            startAngle = (startAngle + 144) % 360;
-        }
-        return coords;
-    }
-
     mouseHover(index: number) {
         if (!this.spots[index].stone) {
             this.spots[index].color = Color.red;
