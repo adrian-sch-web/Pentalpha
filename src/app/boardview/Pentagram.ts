@@ -3,29 +3,30 @@ export class Pentagram {
     public spots: Spot[] = [];
 
     constructor() {
-        let goldenRatio = (1 + Math.sqrt(5)) / 2;
-        this.buildPentagram(90, 270);
-        this.buildPentagram(90 / (goldenRatio ** 2), 90);
+        this.setup();
     }
 
-    public buildPentagram(radius: number, startAngle: number) {
+    public setup() {
+        for (let i = 0; i < 10; i++) {
+            this.spots.push({ stone: false, color: Color.black });
+        }
+    }
+
+    public getPentagramCoords(): number[][] {
+        let goldenRatio = (1 + Math.sqrt(5)) / 2;
+        let coords: number[][] = this.buildPentagram(90, 270);
+        coords.push(...this.buildPentagram(90 / (goldenRatio ** 2), 90));
+        return coords;
+    }
+
+    private buildPentagram(radius: number, startAngle: number): number[][] {
         let degreeToRadian = Math.PI / 180;
+        let coords: number[][] = [];
         for (let i = 0; i < 5; i++) {
-            this.spots.push({
-                point: [100 + radius * Math.cos(startAngle * degreeToRadian), 100 + radius * Math.sin(startAngle * degreeToRadian)],
-                stone: false,
-                color: Color.black
-            });
+            coords.push([100 + radius * Math.cos(startAngle * degreeToRadian), 100 + radius * Math.sin(startAngle * degreeToRadian)]);
             startAngle = (startAngle + 144) % 360;
         }
-    }
-
-    getPentagram(): string {
-        let pentagramPoints = "";
-        for (let i = 0; i < 5; i++) {
-            pentagramPoints += this.spots[i].point.join(",") + " ";
-        }
-        return pentagramPoints;
+        return coords;
     }
 
     mouseHover(index: number) {
@@ -47,7 +48,6 @@ export class Pentagram {
 }
 
 export interface Spot {
-    point: [number, number];
     stone: boolean;
     color: Color;
 }

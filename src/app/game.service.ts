@@ -19,8 +19,12 @@ export class GameService {
 
   constructor() { }
 
+  getPentagramCoords():number[][]{
+    return this.pentagram.getPentagramCoords();
+  }
+
   start() {
-    this.score = 9;
+    this.score = 0;
     this.pentagram.spots = [];
     this.gameRunning = true;
     this.learnMode = false;

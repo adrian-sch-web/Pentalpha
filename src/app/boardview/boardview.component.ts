@@ -8,23 +8,21 @@ import { GameService } from '../game.service';
   styleUrls: ['./boardview.component.scss']
 })
 export class BoardviewComponent implements OnInit {
-  private selectedNode?: number;
-  private possibleNodes?: number[];
-  public pentagram: Pentagram = new Pentagram();
-  public score: number = 0;
-  public gameRunning = true;
-  public learnMode: boolean = false;
-  public placeNext: Set<number> = new Set<number>();
-  public startTime?: Date;
+  public pentagramCoords: number[][] = [];
 
   constructor(private game: GameService) { }
 
   ngOnInit(): void {
     this.game.start();
+    this.pentagramCoords = this.game.getPentagramCoords();
   }
 
-  getPentagram(): string {
-    return this.pentagram.getPentagram();
+  getPentagram(coords: number[][]): string {
+    let pentagramPoints = "";
+    for (let i = 0; i < 5; i++) {
+      pentagramPoints += coords[i].join(",") + " ";
+    }
+    return pentagramPoints;
   }
 
   getOpacity(index: number): string {
