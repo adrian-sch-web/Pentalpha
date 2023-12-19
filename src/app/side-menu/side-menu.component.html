@@ -1,0 +1,39 @@
+<div>
+    <div class="scoreboard">
+        Score: {{score}} <br/>
+        @if(learnMode){
+            <span>Current round is played in learning mode!</span>
+        }
+    </div>
+    <div class="buttons">
+        @if (learnMode) {
+            <div class="learn-advice">
+                Try to place the your next stone on one of the yellow nodes<br/> to achieve the maximum score possible from this point.            
+            </div>
+        }
+        @else{
+            <div class="learn-mode">
+                <button mat-raised-button color="primary" class="button" (click)="startLearnMode()">enable <br/>learning mode</button>            
+            </div>
+        }
+        <div class="restart">
+            <button mat-raised-button color="primary" class="button" (click)="start()">restart</button>
+        </div>  
+    </div>
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpened = true" (closed)="panelOpened = false">
+            <mat-expansion-panel-header>  
+                <mat-panel-title>
+                    {{panelOpened ? "Hide": "Show"}} trivia about Pentalpha
+                </mat-panel-title> 
+            </mat-expansion-panel-header>
+            <div>
+                Einige Quellen gehen davon aus, dass die Ursprünge im alten Ägypten zu finden sind. Man entdeckte dort auf dem Dach
+                des Tempels Sethos I. in West-Theben Kurna ein Pentagramm neben einigen anderen Spielfeldern. Allerdings ist nicht 
+                überliefert, wie es damals (ca 1400 vor Christus) gespielt wurde. Bekann wurde das Spiel zur Zeit Sokrates. Bis heute
+                wird das Spiel noch auf Kreta gespielt. 
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+</div>

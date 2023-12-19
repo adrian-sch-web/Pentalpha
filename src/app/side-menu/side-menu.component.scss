@@ -1,0 +1,39 @@
+.scoreboard {
+    width:fit-content;
+    left: 40px;
+    padding: 5px;
+    border: solid;
+    border-radius: 5px;
+    background-color: rgb(200, 200, 200);
+}
+
+.restart{
+    left: 40px;
+    top: 130px;
+    padding: 5px;
+}
+
+.learn-mode {
+    left: 130px;
+    top: 130px;
+    padding: 5px;
+}
+
+.learn-advice {
+    left: 40px;
+    top: 190px;
+    padding: 5px;
+    border:solid;
+    border-radius: 5px;
+    background-color: rgb(200, 200, 200);
+}
+
+.button {
+    padding: 25px 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+}

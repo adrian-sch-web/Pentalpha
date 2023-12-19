@@ -1,24 +1,5 @@
-<div style="text-align: center;">
-    <div class="scoreboard">
-        Score: {{getScore()}} <br/>
-        @if(getLearnMode()){
-            <span>Current round is played in learning mode!</span>
-        }
-    </div>
-    @if (getLearnMode()) {
-        <div class="learn-advice">
-            Try to place the your next stone on one of the yellow nodes<br/> to achieve the maximum score possible from this point.            
-        </div>
-    }
-    @if(!getLearnMode()){
-        <div class="learn-mode">
-            <button mat-raised-button color="primary" class="button" (click)="startLearnMode()">enable <br/>learning mode</button>            
-        </div>
-    }
-    <div class="restart">
-        <button mat-raised-button color="primary" class="button" (click)="start()">restart</button>
-    </div>    
-    
+<div class="container">
+    <app-side-menu  class="menu" [score]="getScore()" [learnMode]="getLearnMode()" (newGame)="start()" (enableLearn)="startLearnMode()"></app-side-menu>
     <svg height="800" viewBox="0 0 200 200">
         <circle cx="100" cy="100" r="100" style="fill:rgb(143, 113, 98)"/>
         <polygon [attr.points]="getPentagram(pentagramCoords)" stroke="black" fill="none"/>
@@ -33,5 +14,8 @@
     </svg>
     @if(!isGameRunning()){
         <app-gamefinished class="end-menu" [score]="getScore()" [learnMode]="getLearnMode()" [time]="getTimeSpent()" (newGame)="start()"></app-gamefinished>
+    }
+    @else {
+        <div class="end-menu"></div>
     }
 </div>

@@ -7,18 +7,22 @@ import { BoardviewComponent } from './boardview/boardview.component';
 import { GamefinishedComponent } from './gamefinished/gamefinished.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardviewComponent,
-    GamefinishedComponent
+    GamefinishedComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

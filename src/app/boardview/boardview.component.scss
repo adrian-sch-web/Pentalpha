@@ -1,35 +1,13 @@
-.scoreboard {
-    position: absolute;
-    left: 40px;
-    padding: 5px;
-    border: solid;
-    border-radius: 5px;
+.container {
+    display:flex;
+    justify-content: space-around;
 }
 
-.restart{
-    position: absolute;
-    left: 40px;
-    top: 130px;
-    padding: 5px;
-}
-
-.learn-mode {
-    position: absolute;
-    left: 130px;
-    top: 130px;
-    padding: 5px;
-}
-
-.learn-advice {
-    position: absolute;
-    left: 40px;
-    top: 190px;
-    padding: 5px;
-}
-.button {
-    padding: 25px 10px;
+.menu {
+    width:20%;
 }
 
 .end-menu {
-    position: absolute;
+    width:20%;
 }
+
