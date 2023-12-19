@@ -1,22 +1,17 @@
 @if( score < 9){
-<div>
+<div class="end-message">
     You finished the game with a score of {{score}} / 9 <br/>
     Unfortunately you did not reach the maximum score.
-    <br/>
-    <br/>
 </div>
 }
 @else if (!learnMode){
-    <div>WOW! What a game. You finished the game with the maximum score of 9 in a time of {{time | date : 'ss.SSS'}} s.<br/>
+    <div class="end-message">
+        WOW! What a game. You finished the game with the maximum score of 9 in a time of {{time | date : 'ss.SSS'}} s.<br/>
         Congratulations!
-        <br/>
-        <br/>
     </div>
 }
 @else {
-    <div>You reached the maximum score with the help of the computer</div>
-    <div>Try again without help!</div>
-    <br/>
-    <br/>
+    <div class="end-message">You reached the maximum score with the help of the computer <br/> 
+        Try again without help!</div>
 }
 <button mat-raised-button color="primary" (click)="restartGame()">Try again!</button>

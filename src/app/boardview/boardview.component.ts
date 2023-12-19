@@ -122,7 +122,7 @@ export class BoardviewComponent implements OnInit {
   }
 
   checkGame() {
-    this.gameRunning = this.pentagram.some((a, index) => !a.stone && this.getPossibleNodes(index).length > 0)
+    this.gameRunning = this.pentagram.some((node, index) => !node.stone && this.getPossibleNodes(index).length > 0)
   }
 
   setupGame() {
@@ -151,7 +151,7 @@ export class BoardviewComponent implements OnInit {
       if (node.stone) {
         this.learnModeCheck(i);
       }
-    })
+    });
   }
 
   getPassedTime(): number {

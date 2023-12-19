@@ -1,40 +1,34 @@
 <div style="text-align: center;">
-    @if (gameRunning) {
-        <div class="scoreboard">
-            Score: {{score}} <br/>
-            @if(learnMode){
-                <span>Current round is played in learning mode!</span>
-            }
-        </div>
-        @if (learnMode) {
-            <div class="learn-mode">
-                <button mat-raised-button color="primary" class="button" (click)="setupGame()">restart <br/>without help</button>
-            </div>
-            <div class="learn-advice">
-                Try to place the your next stone on one of the yellow nodes<br/> to achieve the maximum score possible from this point.
-            </div>
+    <div class="scoreboard">
+        Score: {{score}} <br/>
+        @if(learnMode){
+            <span>Current round is played in learning mode!</span>
         }
-        @else {
-        
-            <div class="learn-mode">
-                <button mat-raised-button color="primary" class="button" (click)="startLearnMode()">toggle <br/>computer help</button>
-            </div>
-        } 
-        
-        <svg height="800" viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="100" style="fill:rgb(143, 113, 98)"/>
-            <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>
-            @for (spot of pentagram; track $index) {
-                <circle [attr.cx]="spot.point[0]" [attr.cy]="spot.point[1]" r="9" 
-                    [attr.fill-opacity]="getOpacity($index)" 
-                    [attr.fill]="getColorString(spot.color)"
-                    (mouseenter)="mouseEnter($index)"
-                    (mouseleave)="mouseLeave($index)"
-                    (click)="onClick($index)"/>
-            }
-        </svg>
+    </div>
+    @if (learnMode) {
+        <div class="learn-mode">
+            <button mat-raised-button color="primary" class="button" (click)="setupGame()">restart <br/>without help</button>
+        </div>
+        <div class="learn-advice">
+            Try to place the your next stone on one of the yellow nodes<br/> to achieve the maximum score possible from this point.            </div>
     }
     @else {
+        <div class="learn-mode">
+                <button mat-raised-button color="primary" class="button" (click)="startLearnMode()">enable <br/>learning mode</button>            </div>
+    } 
+            <svg height="800" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="100" style="fill:rgb(143, 113, 98)"/>
+        <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>
+        @for (spot of pentagram; track $index) {
+            <circle [attr.cx]="spot.point[0]" [attr.cy]="spot.point[1]" r="9" 
+                [attr.fill-opacity]="getOpacity($index)" 
+                [attr.fill]="getColorString(spot.color)"
+                (mouseenter)="mouseEnter($index)"
+                (mouseleave)="mouseLeave($index)"
+                (click)="onClick($index)"/>
+        }
+    </svg>
+    @if(!gameRunning){
         <app-gamefinished [score]="score" [learnMode]="learnMode" [time]="getPassedTime()" (newGame)="setupGame()"></app-gamefinished>
     }
 </div>
