@@ -29,6 +29,6 @@
         }
     </svg>
     @if(!isGameRunning()){
-        <app-gamefinished class="end-menu" [score]="getScore()" [learnMode]="getLearnMode()" [time]="getPassedTime()" (newGame)="start()"></app-gamefinished>
+        <app-gamefinished class="end-menu" [score]="getScore()" [learnMode]="getLearnMode()" [time]="getTimeSpent()" (newGame)="start()"></app-gamefinished>
     }
 </div>

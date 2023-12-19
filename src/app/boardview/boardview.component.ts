@@ -67,7 +67,7 @@ export class BoardviewComponent implements OnInit {
     return this.game.gameRunning;
   }
 
-  getPassedTime(): number {
-    return this.game.getPassedTime();
+  getTimeSpent(): number {
+    return this.game.getTimeSpent();
   }
 }

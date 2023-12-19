@@ -6,7 +6,7 @@
 }
 @else if (!learnMode){
     <div class="end-message">
-        WOW! What a game. You finished the game with the maximum score of 9 in a time of {{time | date : 'ss.SSS'}} s.<br/>
+        WOW! What a game. You finished the game with the maximum score of 9 in a time of {{time >= 60000 ? (time| date : 'm:ss.SSS') : (time | date : 'ss.SSS')}}<br/>
         Congratulations!
     </div>
 }

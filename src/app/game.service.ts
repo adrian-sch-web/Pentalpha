@@ -10,6 +10,7 @@ export class GameService {
   private possibleNodes?: number[];
   private placeNext: Set<number> = new Set<number>();
   private startTime?: Date;
+  private timeSpent: number = 0;
 
   public score: number = 0;
   public gameRunning: boolean = true;
@@ -19,7 +20,7 @@ export class GameService {
   constructor() { }
 
   start() {
-    this.score = 0;
+    this.score = 9;
     this.pentagram.spots = [];
     this.gameRunning = true;
     this.learnMode = false;
@@ -72,7 +73,10 @@ export class GameService {
   }
 
   checkGame() {
-    this.gameRunning = this.pentagram.spots.some((node, index) => !node.stone && this.pentagram.getPossibleNodes(index).length > 0)
+    this.gameRunning = this.pentagram.spots.some((node, index) => !node.stone && this.pentagram.getPossibleNodes(index).length > 0);
+    if (this.gameRunning && this.startTime) {
+      this.timeSpent = new Date().getTime() - this.startTime.getTime();
+    }
   }
 
   startLearnMode() {
@@ -117,10 +121,7 @@ export class GameService {
     return this.pentagram.spots[index].stone ? "1" : "0.2";
   }
 
-  getPassedTime(): number {
-    if (this.startTime) {
-      return new Date().getTime() - this.startTime.getTime();
-    }
-    return 0;
+  getTimeSpent(): number {
+    return this.timeSpent;
   }
 }
