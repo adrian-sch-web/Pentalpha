@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class GamefinishedComponent {
   @Input() score: number= 0;
-  @Input() cheatMode: boolean = false;
+  @Input() learnMode: boolean = false;
   @Input() time: number = 0;
   @Output() newGame = new EventEmitter<boolean>;
 

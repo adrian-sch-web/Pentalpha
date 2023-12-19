@@ -13,7 +13,7 @@ export class BoardviewComponent implements OnInit {
   public pentagram: Pentagram = [];
   public score: number = 0;
   public gameRunning = true;
-  public cheatMode: boolean = false;
+  public learnMode: boolean = false;
   public placeNext: Set<number> = new Set<number>();
   public startTime?: Date;
 
@@ -82,7 +82,7 @@ export class BoardviewComponent implements OnInit {
         continue;
       }
       this.pentagram[point].color = Color.black;
-      if (this.cheatMode) {
+      if (this.learnMode) {
         this.placeNext.forEach(i => this.pentagram[i].color = 3);
       }
     }
@@ -116,8 +116,8 @@ export class BoardviewComponent implements OnInit {
     this.mouseLeave(temp);
     this.score++;
     this.checkGame();
-    if (this.cheatMode) {
-      this.cheatModeCheck(index);
+    if (this.learnMode) {
+      this.learnModeCheck(index);
     }
   }
 
@@ -130,14 +130,14 @@ export class BoardviewComponent implements OnInit {
     this.score = 0;
     this.pentagram = [];
     this.gameRunning = true;
-    this.cheatMode = false;
+    this.learnMode = false;
     this.placeNext = new Set();
     this.startTime = undefined;
     this.buildPentagram(90, 270);
     this.buildPentagram(90 / (goldenRatio ** 2), 90);
   }
 
-  cheatModeCheck(index: number) {
+  learnModeCheck(index: number) {
     this.placeNext.delete(index);
     let temp = index > 4 ? 0 : 5;
     if (!this.pentagram[(index + 7) % 5 + temp].stone) this.placeNext.add((index + 7) % 5 + temp);
@@ -145,11 +145,11 @@ export class BoardviewComponent implements OnInit {
     this.placeNext.forEach(i => this.pentagram[i].color = 3);
   }
 
-  startCheatMode() {
-    this.cheatMode = true;
+  startLearnMode() {
+    this.learnMode = true;
     this.pentagram.forEach((node, i) => {
       if (node.stone) {
-        this.cheatModeCheck(i);
+        this.learnModeCheck(i);
       }
     })
   }

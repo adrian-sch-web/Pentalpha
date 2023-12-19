@@ -2,22 +2,22 @@
     @if (gameRunning) {
         <div class="scoreboard">
             Score: {{score}} <br/>
-            @if(cheatMode){
-                <span>Current round is played in cheat mode!</span>
+            @if(learnMode){
+                <span>Current round is played in learning mode!</span>
             }
         </div>
-        @if (cheatMode) {
-            <div class="cheat-mode">
+        @if (learnMode) {
+            <div class="learn-mode">
                 <button mat-raised-button color="primary" class="button" (click)="setupGame()">restart <br/>without help</button>
             </div>
-            <div class="cheat-advice">
+            <div class="learn-advice">
                 Try to place the your next stone on one of the yellow nodes<br/> to achieve the maximum score possible from this point.
             </div>
         }
         @else {
         
-            <div class="cheat-mode">
-                <button mat-raised-button color="primary" class="button" (click)="startCheatMode()">toggle <br/>computer help</button>
+            <div class="learn-mode">
+                <button mat-raised-button color="primary" class="button" (click)="startLearnMode()">toggle <br/>computer help</button>
             </div>
         } 
         
@@ -25,11 +25,16 @@
             <circle cx="100" cy="100" r="100" style="fill:rgb(143, 113, 98)"/>
             <polygon [attr.points]="getPentagram()" stroke="black" fill="none"/>
             @for (spot of pentagram; track $index) {
-                <circle [attr.cx]="spot.point[0]" [attr.cy]="spot.point[1]" r="9" [attr.fill-opacity]="getOpacity($index)" [attr.fill]="getColorString(spot.color)" (mouseenter)="mouseEnter($index)" (mouseleave)="mouseLeave($index)" (click)="onClick($index)"/>
+                <circle [attr.cx]="spot.point[0]" [attr.cy]="spot.point[1]" r="9" 
+                    [attr.fill-opacity]="getOpacity($index)" 
+                    [attr.fill]="getColorString(spot.color)"
+                    (mouseenter)="mouseEnter($index)"
+                    (mouseleave)="mouseLeave($index)"
+                    (click)="onClick($index)"/>
             }
         </svg>
     }
     @else {
-        <app-gamefinished [score]="score" [cheatMode]="cheatMode" [time]="getPassedTime()" (newGame)="setupGame()"></app-gamefinished>
+        <app-gamefinished [score]="score" [learnMode]="learnMode" [time]="getPassedTime()" (newGame)="setupGame()"></app-gamefinished>
     }
 </div>
