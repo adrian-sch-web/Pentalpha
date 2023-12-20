@@ -43,6 +43,9 @@ export class GameService {
       }
       return;
     }
+    if (this.pentagram.spots[index].stone) {
+      return;
+    }
     this.selectedNode = index;
     this.possibleNodes = possibleNodes;
   }
@@ -51,7 +54,12 @@ export class GameService {
     if (this.selectedNode != undefined) {
       return;
     }
-    this.pentagram.mouseHover(index);
+      if (!this.pentagram.spots[index].stone) {
+          this.pentagram.spots[index].color = Color.red;
+          for (let point of this.pentagram.getPossibleNodes(index)) {
+              this.pentagram.spots[point].color = Color.green;
+          }
+      }
   }
 
   mouseLeave(index: number) {
@@ -96,11 +104,10 @@ export class GameService {
 
   place(index: number) {
     this.pentagram.spots[index].stone = true;
-    let temp = this.selectedNode!;
     this.selectedNode = undefined;
     this.possibleNodes = undefined;
     this.score++;
-    this.mouseLeave(temp);
+    this.pentagram.updateAllColor();
     this.checkGame();
     if (this.learnMode) {
       this.learnModeCheck(index);

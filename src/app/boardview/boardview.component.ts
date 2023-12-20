@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Pentagram, Color } from './Pentagram';
 import { GameService } from '../game.service';
 
 @Component({
@@ -13,7 +12,7 @@ export class BoardviewComponent implements OnInit {
   constructor(private game: GameService) { }
 
   ngOnInit(): void {
-    this.game.start();
+    this.start();
   }
 
   getPentagram(coords: number[][]): string {

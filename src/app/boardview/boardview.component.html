@@ -1,5 +1,5 @@
 <div class="container">
-    <app-side-menu  class="menu" [score]="getScore()" [learnMode]="getLearnMode()" (newGame)="start()" (enableLearn)="startLearnMode()"></app-side-menu>
+    <app-side-menu  class="menu" [score]="getScore()" [learnMode]="getLearnMode()" (newGame)="start()" (enableLearn)="startLearnMode()"/>
     <svg height="800" viewBox="0 0 200 200">
         <circle cx="100" cy="100" r="100" style="fill:rgb(143, 113, 98)"/>
         <polygon [attr.points]="getPentagram(pentagramCoords)" stroke="black" fill="none"/>
@@ -13,7 +13,7 @@
         }
     </svg>
     @if(!isGameRunning()){
-        <app-gamefinished class="end-menu" [score]="getScore()" [learnMode]="getLearnMode()" [time]="getTimeSpent()" (newGame)="start()"></app-gamefinished>
+        <app-gamefinished class="end-menu" [score]="getScore()" [learnMode]="getLearnMode()" [time]="getTimeSpent()" (newGame)="start()"/>
     }
     @else {
         <div class="end-menu"></div>

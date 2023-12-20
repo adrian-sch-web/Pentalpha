@@ -1,4 +1,3 @@
-
 export class Pentagram {
     public spots: Spot[] = [];
 
@@ -12,21 +11,16 @@ export class Pentagram {
         }
     }
 
-    mouseHover(index: number) {
-        if (!this.spots[index].stone) {
-            this.spots[index].color = Color.red;
-            for (let point of this.getPossibleNodes(index)) {
-                this.spots[point].color = Color.green;
-            }
-        }
-    }
-
     getPossibleNodes(index: number): number[] {
         let places: number[] = [];
         let temp = index > 4 ? 0 : 5;
         if (!this.spots[(index + 2) % 5 + temp].stone) places.push((index + 2) % 5 + temp);
         if (!this.spots[(index + 3) % 5 + temp].stone) places.push((index + 3) % 5 + temp);
         return places;
+    }
+
+    updateAllColor() {
+        this.spots.forEach(a => a.color = Color.black);
     }
 }
 
